@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="coastal_location">
+        <item>Eureka</item>
+        <item>Los Angeles</item>
+        <item>Monterey</item>
+        <item>San Diego</item>
+        <item>San Francisco</item>
+        <item>San Luis Obispo</item>
+        <item>Santa Barbara</item>
+    </string-array>
+</resources>
