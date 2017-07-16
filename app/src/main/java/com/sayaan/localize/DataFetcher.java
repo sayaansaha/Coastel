@@ -3,12 +3,20 @@ package com.sayaan.localize;
 import android.net.Uri;
 import android.util.Log;
 
+
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -83,16 +91,29 @@ public class DataFetcher {
     }
 
     // returns HttpURLConnection with params attached => is called by request
-    public static HttpURLConnection requestHandler(String apiMethod, String urlPath, Map<String, Object> params)  throws IOException {
-        HttpURLConnection connection = createURLConnection(urlPath, apiMethod) ;
-
+    public static HttpURLConnection requestHandler(String apiMethod, String urlPath, Map<String, Object> params) throws IOException {
         if (apiMethod.equalsIgnoreCase("GET")) {
             urlPath = setGetParams(urlPath, params);
         }
+        HttpURLConnection connection = createURLConnection(urlPath, apiMethod) ;
+
         if (apiMethod.equalsIgnoreCase("POST")) {
             setPostParams(connection, params);
         }
         return connection;
+    }
+
+
+    public Map<String, Object> callApi(String urlPath, Map<String,Object> params, String httpMethod) throws IOException{
+        HttpURLConnection req = requestHandler(httpMethod, urlPath,params);
+        InputStream in = req.getInputStream();
+        InputStreamReader isw = new InputStreamReader(in);
+
+        Gson gson = new Gson();
+        Map<String,Object> data = new HashMap<String,Object>();
+        data = (Map<String,Object>) gson.fromJson(isw, data.getClass());
+
+        return  data;
     }
 
 
