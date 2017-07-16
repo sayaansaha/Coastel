@@ -16,6 +16,10 @@ import java.util.Map;
  */
 
 public class DataFetcher {
+
+    public DataFetcher() {
+    }
+
     static HttpURLConnection createURLConnection(String urlPath, String httpMethod, int timeoutSeconds) throws IOException {
         URL url = new URL(urlPath);
         HttpURLConnection connection =(HttpURLConnection) url.openConnection();
@@ -38,11 +42,7 @@ public class DataFetcher {
         return createURLConnection(fullPath, httpMethod, 400);
     }
 
-    public static getApiData() {
-
-    }
-
-    private static String attachGetParams(String path, Map<String, Object> params) {
+    private static String setGetParams(String path, Map<String, Object> params) {
         if (params == null) {
             return path;
         }
@@ -58,7 +58,7 @@ public class DataFetcher {
         }
     }
 
-    private static void attachPostParams(HttpURLConnection connection, Map<String, Object> params) throws IOException{
+    private static void setPostParams(HttpURLConnection connection, Map<String, Object> params) throws IOException{
         OutputStream os = connection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
         String query = getQuery(params);
@@ -81,6 +81,21 @@ public class DataFetcher {
         }
         return builder.build().getEncodedQuery();
     }
+
+    // returns HttpURLConnection with params attached => is called by request
+    public static HttpURLConnection requestHandler(String apiMethod, String urlPath, Map<String, Object> params)  throws IOException {
+        HttpURLConnection connection = createURLConnection(urlPath, apiMethod) ;
+
+        if (apiMethod.equalsIgnoreCase("GET")) {
+            urlPath = setGetParams(urlPath, params);
+        }
+        if (apiMethod.equalsIgnoreCase("POST")) {
+            setPostParams(connection, params);
+        }
+        return connection;
+    }
+
+
 
 
 }
