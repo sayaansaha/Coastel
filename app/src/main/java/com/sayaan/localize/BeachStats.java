@@ -14,8 +14,18 @@ public class BeachStats {
     private boolean windy;
     private String weatherConditions, location;
     private DataFetcher api = new DataFetcher();
-
-
+    // collection of locationIds for parameters to NOAA
+    private static final Map<String, Integer > locationId;
+    static {
+        locationId = new HashMap<>();
+        locationId.put("Eureka", 9418767);
+        locationId.put("Los Angeles", 9413450);
+        locationId.put("Monterey", 9413450);
+        locationId.put("San Diego", 9410230);
+        locationId.put("Santa Barbara", 9411340);
+        locationId.put("San Francisco", 9414290);
+        locationId.put("San Luis Obispo", 9412110);
+    }
 
     public BeachStats(String locationChoosen) {
         location = locationChoosen;
@@ -56,8 +66,10 @@ public class BeachStats {
         parameters.put("units", "english");
         parameters.put("timezone","lst");
         parameters.put("date","latest");
-        parameters.put("station", location);
-        Map<String, Object> info = api.callApi("https://tidesandcurrents.noaa.gov/api/datagetter", parameters, "get");
+        parameters.put("station", locationId.get(location));
+        parameters.put("product", "waterTemp");
+        parameters.put("application", "Web_Services");
+        Map<String, Object> response = api.callApi("https://tidesandcurrents.noaa.gov/api/datagetter", parameters, "get");
 
     }
 
