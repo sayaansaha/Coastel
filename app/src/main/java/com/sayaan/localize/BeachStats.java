@@ -37,12 +37,16 @@ public class BeachStats {
         return windy;
     }
 
-    private boolean setWindy(boolean arg) {
-        windy = arg
+    private void setWindy(boolean condition) {
+        windy = condition;
     }
 
-    private float setAirTemp(float arg) {
-        airTemp = arg;
+    private void setAirTemp(float temp) {
+        airTemp = temp;
+    }
+
+    private void setWaterTemp(float temp) {
+        waterTemp = temp;
     }
 
     // first call NOAA back end and get back a response
@@ -52,7 +56,7 @@ public class BeachStats {
         parameters.put("units", "english");
         parameters.put("timezone","lst");
         parameters.put("date","latest");
-        parameters.put("station";)
+        parameters.put("station", location);
         Map<String, Object> info = api.callApi("https://tidesandcurrents.noaa.gov/api/datagetter", parameters, "get");
 
     }
