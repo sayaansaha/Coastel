@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/result_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Beach Action"
-        android:layout_marginTop="30dp"
-        android:textSize="28dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textAllCaps="true"/>
+        android:layout_marginTop="30dp"
+        android:ems="6"
+        android:text="@string/Location_Name"
+        android:textAllCaps="true"
+        android:textSize="28dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="64dp"
+        android:text="Air Temperature" />
+
+    <TextView
+        android:id="@+id/water_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="50dp"
+        android:text="Water Temperature" />
+
+    <TextView
+        android:id="@+id/air_temp_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginStart="60dp"
+        android:layout_toEndOf="@+id/water_temp"
+        android:text="@string/Air_Temp" />
+
+    <TextView
+        android:id="@+id/water_temp_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/water_temp"
+        android:layout_alignStart="@+id/air_temp_field"
+        android:text="@string/Water_Temp" />
+
+
 </RelativeLayout>
